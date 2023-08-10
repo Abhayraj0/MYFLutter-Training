@@ -10,9 +10,8 @@ void main()
     print("Enter Student name : ");
     String? name = stdin.readLineSync()!;
       Students.add(name);
-      status++;
+  status++;
   }
-  // ignore: dead_code
   for (var item in Students) {
     print(item);
   }
