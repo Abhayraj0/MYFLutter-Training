@@ -1,0 +1,69 @@
+21. What is inheritance?
+=> one class derived properties of another class its called inheritance
+    inheritance which is provide reusabilities
+    using of inheritance we can reduce our code
+
+22. Which inheritance is not supported by Dart? Why? B3. What is
+advantage of inheritance?
+=> Multiple Inheritance: This inheritance occurs when a class inherits 
+    more than one parent class. 
+    Dart doesn't support this.
+    Multi-Level Inheritance: This inheritance occurs when a class inherits another child class.
+ -> Advantages of Inheritance : - It Allows the code to be reused as many times as needed. - The base class once defined and once it is compiled,
+     it need not be reworked.
+
+23. Difference between inheritance and encapsulation. B5. Difference
+between inheritance and abstraction.
+=> Encapsulation is a mechanism that binds together code and the data it manipulates 
+   whereas Inheritance is the mechanism by which a class acquires the properties and methods of another class.
+=> The main difference between abstraction and inheritance is that abstraction allows hiding the internal details and displaying only the functionality to the users,
+   while inheritance allows using properties and methods of an already existing class. Object-Oriented Programming (OOP) is a major programming paradigm
+
+24. Difference between inheritance and polymorphism
+=> Inheritance is a mechanism where an object acquires all the properties of the parent object. 
+   Polymorphism is that which can be defined in multiple forms. Inheritance is applied to the classes. 
+   GPolymorphism is applied to methods or functions.
+
+25. Can we override static method in Dart?
+=> In Dart, it is not possible to override a static method.
+
+26. Can we overload static method in Dart?
+=> You can't override static methods.
+
+32. How do you restrict a member of a class from inheriting by its sub
+classes? 
+=> We can restrict a member of a class from inheriting to it's sub classes by declaring the member as a private. 
+   Because, private members are not inherited to sub classes.
+
+33. How do you implement multiple inheritance in Dart?
+=> No, Dart does not support multiple implementation inheritance. Dart has interfaces, and like most other similar languages it has multiple interface inheritance. 
+   For implementation, there is only a single super-class chain that a class can inherit member implementations from.
+
+34. Can a class extend by itself in Dart?
+=> Dart allows single inheritance, which means a class can extend from a single parent. But a single parent can have multiple children, 
+   and each child can have its own children, building up a hierarchy many classes deep.
+
+35. How do you override a private method in Dart?
+=> 1) Copy the package folder in your current code and change it as per your need. 
+   2) Create a public method in library class and pass that private method in it. 
+      You can have the access of that private method as defined public method
+
+36. When to overload a method in Dart and when to override it?
+=> Function overloading is not supported in Dart at all. Function overloading requires static types. 
+   Dart at its core is a dynamically typed language.
+   You can either use different names for the methods or optional named or unnamed parameters.
+
+37. What the order is of extends and implements keyword on Dart class
+declaration? 
+=> Extends is the typical OOP class inheritance. 
+   If class a extends class b all properties, variables, functions implemented in class b are also available in class a. 
+   Additionally you can override functions etc.
+   EX. You use extend if you want to create a more specific version of a class. For example the class car could extend the class vehicle. 
+       In Dart a class can only extend one class.
+=> Implements can be used if you want to create your own implementation of another class or interface. 
+   When class a implements class b. All functions defined in class b must be implemented.
+    EX. When you're implementing another class, you do not inherit code from the class. 
+        You only inherit the type. In Dart you can use the implements keyword with multiple classes or interfaces.
+
+
+
