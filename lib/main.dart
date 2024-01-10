@@ -1,36 +1,41 @@
-// ignore_for_file: dead_code
-
+import 'package:digitalsocietyapp/Digital%20Society/complaintAdd.dart';
+import 'package:digitalsocietyapp/Digital%20Society/dashborM.dart';
+import 'package:digitalsocietyapp/Digital%20Society/dashbord.dart';
+import 'package:digitalsocietyapp/Digital%20Society/displayMem.dart';
+import 'package:digitalsocietyapp/Digital%20Society/eventAdd.dart';
+import 'package:digitalsocietyapp/Digital%20Society/memberScreen.dart';
+import 'package:digitalsocietyapp/Digital%20Society/noticeAddrgister.dart';
+import 'package:digitalsocietyapp/Digital%20Society/registerM.dart';
+import 'package:digitalsocietyapp/splashScreen.dart';
 import 'package:flutter/material.dart';
-import 'package:login/forgetPassword.dart';
-import 'package:login/home_screen.dart';
-import 'package:login/login.dart';
-import 'package:login/otp_verification.dart';
-import 'package:login/phone_verification.dart';
-import 'package:login/register.dart';
-import 'package:login/splash.dart';
-import 'package:login/userScreen.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
-  bool isDark = false;
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    theme: ThemeData(
-      primarySwatch: Colors.amber,
-      useMaterial3: true,
-      brightness: isDark ? Brightness.dark : Brightness.light
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    return GetMaterialApp(
+      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        textTheme: GoogleFonts.latoTextTheme(textTheme).copyWith(
+      bodyMedium: GoogleFonts.oswald(textStyle: textTheme.bodyMedium),
     ),
-    initialRoute: 'splash',
-    routes: {
-      'login': (context) => MyLogin(),
-      'register': (context) => MyRegister(),
-      'forgetPassword': (context) => forgetPassword(),
-      'userScreen' :(context) => UserScreen(),
-      'phone_verification' :(context) => PhoneVerification(),
-      'splash' :(context) => Splash(),
-      'home_screen' :(context) => Home_Screen(),
-      'otp_verification' :(context) => MyOtpVerification()
-      },
-  ));
+        useMaterial3: true,
+      ),
+      home: MyMemberDashbord(),
+    );
+  }
 }
 
 
