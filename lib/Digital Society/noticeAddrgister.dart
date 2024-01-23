@@ -1,7 +1,28 @@
+import 'dart:convert';
+
+import 'package:digitalsociety/Digital%20Society/Model%20All/eventModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gradient_button/flutter_gradient_button.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
+import 'package:http/http.dart' as http;
+
+Future<void> addNotic(String? titleN,descN,dateN) async
+{
+  final response = await http.post(Uri.parse(""),body: {
+    'titleN' : titleN,
+    'descN' : descN,
+    'dateN' : dateN,
+  });
+  if (response.statusCode == 200) {
+    EventModel.fromJson(jsonDecode(response.body));
+    Get.snackbar("Notice", "Notice add successfully");
+    Get.back();
+  } else {
+    throw Exception("Failed Api");
+  }
+}
 
 class MyNoticeAdd extends StatefulWidget {
   const MyNoticeAdd({super.key});
@@ -111,7 +132,9 @@ class _MyNoticeAddState extends State<MyNoticeAdd> {
                       onPressed: () {
                         setState(() {
                           if (_forKey.currentState!.validate()) {
-
+                              setState(() {
+                                addNotic(_titleNController.text, _descNController.text, _dateController.text);
+                              });
                           }
                         });
                       },

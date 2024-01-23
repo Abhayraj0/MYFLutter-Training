@@ -1,11 +1,10 @@
 import 'dart:convert';
 
-import 'package:digitalsocietyapp/Digital%20Society/Model%20All/memberModel.dart';
-import 'package:digitalsocietyapp/Digital%20Society/dashbord.dart';
-import 'package:digitalsocietyapp/Digital%20Society/loginM.dart';
+import 'package:digitalsociety/Digital%20Society/Model%20All/memberModel.dart';
+import 'package:digitalsociety/Digital%20Society/dashborM.dart';
+import 'package:digitalsociety/Digital%20Society/loginM.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gradient_button/flutter_gradient_button.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
 
@@ -211,8 +210,8 @@ class _MyRegisterMemState extends State<MyRegisterMem> {
                           onPressed: () {
                             setState(() {
                               if (_formKey.currentState!.validate()) {
-                                addData(_nameController.text, _contactController.text, _houseController.text, _emamilConteroller.text, _passConteroller.text);
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => MyChairmanDashbord(),));
+                              var registerData = addData(_nameController.text, _contactController.text, _houseController.text, _emamilConteroller.text, _passConteroller.text);
+                                 //.push(context, MaterialPageRoute(builder: (context) => MyMemberDashbord(memberModel1: registerData),));
                               }
                             });
                           },

@@ -1,14 +1,16 @@
 import 'dart:convert';
 
-import 'package:digitalsocietyapp/Digital%20Society/Model%20All/eventModel.dart';
+import 'package:digitalsociety/Digital%20Society/Model%20All/eventModel.dart';
+import 'package:digitalsociety/Digital%20Society/eventDisp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gradient_button/flutter_gradient_button.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 
 //https://grateful-amperages.000webhostapp.com/eventDelete.php
-//https://grateful-amperages.000webhostapp.com/eventDisplay.php
+
 
 Future<void> addEvent(String? titleE, descE, dateE) async {
   final response = await http.post(
@@ -17,6 +19,8 @@ Future<void> addEvent(String? titleE, descE, dateE) async {
 
     if (response.statusCode == 200) {
       EventModel.fromJson(jsonDecode(response.body));
+      Get.snackbar("Event", "Event Add Successfully");
+      Get.to(MyEventDisplayEx());
     } else{
       throw Exception("Failed Event Api");
     }
@@ -118,7 +122,7 @@ class _MyEventAddState extends State<MyEventAdd> {
 
                         if (pickedDate != null) {
                           String formateDate =
-                              DateFormat("yyyy-MM-dd").format(pickedDate);
+                              DateFormat("dd-MM-yyyy").format(pickedDate);
                           setState(() {
                             _dateEController.text = formateDate;
                           });
@@ -128,24 +132,48 @@ class _MyEventAddState extends State<MyEventAdd> {
                     SizedBox(
                       height: 34,
                     ),
-                    GradientButton(
-                      colors: [Colors.purple, Colors.deepPurpleAccent],
-                      height: 50,
-                      width: 200,
-                      radius: 25,
-                      gradientDirection: GradientDirection.leftToRight,
-                      textStyle: TextStyle(color: Colors.white),
-                      text: "Submit",
-                      onPressed: () {
-                        setState(() {
-                          if (_forKey.currentState!.validate()) {
+                    // GradientButton(
+                    //   colors: [Colors.purple, Colors.deepPurpleAccent],
+                    //   height: 50,
+                    //   width: 200,
+                    //   radius: 25,
+                    //   gradientDirection: GradientDirection.leftToRight,
+                    //   textStyle: TextStyle(color: Colors.white),
+                    //   text: "Submit",
+                      
+                    //   onPressed: () {
+                        // setState(() {
+                          // if (_forKey.currentState!.validate()) {
+                          //   setState(() {
+                          //     addEvent(_titleEController.text, _descEController.text, _dateEController.text);
+                          //   });
+                          // }
+                    //     });
+                    //   },
+                    // ),
+                    
+                    InkWell(
+                      onLongPress: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => MyEventDisplayEx(),));
+                      },
+                      onTap: () {
+                        if (_forKey.currentState!.validate()) {
                             setState(() {
                               addEvent(_titleEController.text, _descEController.text, _dateEController.text);
                             });
                           }
-                        });
+
                       },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                        height: 40,width: 150,
+                        decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(20)),
+                          gradient: LinearGradient(colors:[Colors.purple, Colors.deepPurpleAccent],begin: Alignment.topLeft,end: Alignment.bottomRight,tileMode: TileMode.mirror )
+                        ),
+                        child: Text("Submit",style: TextStyle(color: Colors.white,fontSize: 15),textAlign: TextAlign.center,),
+                      ),
                     ),
+                    SizedBox(height: 30,),
                   ]),
                 ),
               ))

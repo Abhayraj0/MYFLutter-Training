@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:digitalsocietyapp/Digital%20Society/Model%20All/memberModel.dart';
-import 'package:digitalsocietyapp/Digital%20Society/displayMem.dart';
+import 'package:digitalsociety/Digital%20Society/Model%20All/memberModel.dart';
+import 'package:digitalsociety/Digital%20Society/displayMem.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 

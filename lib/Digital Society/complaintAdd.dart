@@ -1,13 +1,14 @@
 import 'dart:convert';
 
-import 'package:digitalsocietyapp/Digital%20Society/Model%20All/complateModel.dart';
+import 'package:digitalsociety/Digital%20Society/Model%20All/complateModel.dart';
+import 'package:digitalsociety/Digital%20Society/complaintDisp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gradient_button/flutter_gradient_button.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:http/http.dart' as http;
-//https://grateful-amperages.000webhostapp.com/complateDisplay.php
-//https://grateful-amperages.000webhostapp.com/complateDelete.php
+
 
 class MyComplaintAdd extends StatefulWidget {
   const MyComplaintAdd({super.key});
@@ -23,6 +24,8 @@ class _MyComplaintAddState extends State<MyComplaintAdd> {
 
     if (response.statusCode == 200) {
       ComplaintsModel.fromJson(jsonDecode(response.body));
+      Get.snackbar("Complaint", "Complaint Add Successfully");
+      Get.back();
     } else {
       throw Exception("Failed the Complaint APi");
     }
@@ -33,7 +36,7 @@ class _MyComplaintAddState extends State<MyComplaintAdd> {
   final _descCController = TextEditingController();
 
   final _forKey = GlobalKey<FormState>();
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,13 +1,14 @@
 import 'dart:convert';
 
-import 'package:digitalsocietyapp/Digital%20Society/Model%20All/chairman.dart';
-import 'package:digitalsocietyapp/Digital%20Society/dashbord.dart';
-import 'package:digitalsocietyapp/Digital%20Society/loginM.dart';
+import 'package:digitalsociety/Digital%20Society/Model%20All/chairman.dart';
+import 'package:digitalsociety/Digital%20Society/dashbord.dart';
+import 'package:digitalsociety/Digital%20Society/loginM.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gradient_button/flutter_gradient_button.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:lottie/lottie.dart';
+
 //https://grateful-amperages.000webhostapp.com/chairman.php
 class MyChairmanLogin extends StatefulWidget {
   const MyChairmanLogin({super.key});
@@ -17,22 +18,37 @@ class MyChairmanLogin extends StatefulWidget {
 }
 
 class _MyChairmanLoginState extends State<MyChairmanLogin> {
-
   Future<void> loginChairman(String? email, pass) async {
-    final response = await http.post(Uri.parse("https://grateful-amperages.000webhostapp.com/chairman.php"),body: {'email' : email, 'pass' : pass});
+    try {
+      final response = await http.post(
+          Uri.parse(
+              "https://grateful-amperages.000webhostapp.com/chairman.php"),
+          body: {'email': email, 'pass': pass});
 
-    List jsonRespo = jsonDecode(response.body);
-
-    if (jsonRespo.isEmpty) {
-      Get.snackbar("Login", "Login Failed, Please try agin");
-    } else {
       if (response.statusCode == 200) {
-        jsonRespo.map((e) => ChairmanModel.fromJason(e)).toList();
-        Get.snackbar("Login", "Successfully Login",backgroundGradient: LinearGradient(colors: Colors.primaries));
-        Navigator.push(context, MaterialPageRoute(builder: (context) => MyChairmanDashbord(),));
+        var data = jsonDecode(response.body.toString());
+        String? id = data[0]['id'];
+        String? nameCh = data[0]['nameCh'];
+        String? email = data[0]['email'];
+        print("---------------------------->>>>>>>>>$nameCh");
+
+        print(id);
+        Get.snackbar("Login", "Successfully Login",
+            backgroundGradient: LinearGradient(colors: Colors.primaries));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => MyChairmanDashbord(
+                id: id,
+                name: nameCh,
+                email: email,
+              ),
+            ));
       } else {
         throw Exception("Failed Api");
       }
+    } catch (e) {
+      Get.snackbar("Login", "Failed please try agin");
     }
   }
 
@@ -65,7 +81,8 @@ class _MyChairmanLoginState extends State<MyChairmanLogin> {
                     validator: (value) {
                       if (value!.isEmpty) {
                         return "Email is required";
-                      } return null;
+                      }
+                      return null;
                     },
                     controller: _emamilConteroller,
                     decoration: InputDecoration(
@@ -78,11 +95,12 @@ class _MyChairmanLoginState extends State<MyChairmanLogin> {
                     height: 20,
                   ),
                   TextFormField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Pasword is required";
-                      } return null;
-                    },
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Pasword is required";
+                        }
+                        return null;
+                      },
                       obscureText: !isVisible,
                       controller: _passConteroller,
                       decoration: InputDecoration(
@@ -112,16 +130,23 @@ class _MyChairmanLoginState extends State<MyChairmanLogin> {
                     text: "Login",
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        loginChairman(_emamilConteroller.text, _passConteroller.text);
+                        loginChairman(
+                            _emamilConteroller.text, _passConteroller.text);
                       }
                     },
                   ),
                   SizedBox(
                     height: 40,
                   ),
-                  TextButton(onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => MyMemberLogin(),));
-                  }, child: Text("Member Login Page"))
+                  TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MyMemberLogin(),
+                            ));
+                      },
+                      child: Text("Member Login Page"))
                 ],
               ),
             ),
