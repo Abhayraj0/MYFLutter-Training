@@ -48,6 +48,9 @@ class _MyEventDisplayExState extends State<MyEventDisplayEx> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Member Event Delete"),
+      ),
         body: FutureBuilder(
       future: _futureE,
       builder: (context, snapshot) {
@@ -143,7 +146,7 @@ class _MyEventDisplayExState extends State<MyEventDisplayEx> {
         } else {
           print("Error : ${snapshot.hasError}");
         }
-        return CircularProgressIndicator();
+        return Center(child: CircularProgressIndicator());
       },
     ));
   }

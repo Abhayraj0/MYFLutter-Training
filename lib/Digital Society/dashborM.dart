@@ -3,6 +3,7 @@ import 'package:digitalsociety/Digital%20Society/eventDisMem.dart';
 import 'package:digitalsociety/Digital%20Society/notic.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 //https://grateful-amperages.000webhostapp.com/getMember1.php
 
 // https:grateful-amperages.000webhostapp.com/displayMember1.php
@@ -28,7 +29,7 @@ class MyMemberDashbord extends StatefulWidget {
   String? id, name, email, contact, houseno;
   MyMemberDashbord(
       {super.key,
-      required this.id,
+      this.id,
       required this.name,
       required this.email,
       required this.houseno,
@@ -63,11 +64,17 @@ class _MyMemberDashbordState extends State<MyMemberDashbord> {
   //   super.initState();
   //   getDashboardDi();
   // }
+  Future<void> logoutUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs?.setBool("isLoggedIn", true);
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.logout_sharp))],
+      ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
@@ -141,29 +148,6 @@ class _MyMemberDashbordState extends State<MyMemberDashbord> {
           ],
         ),
       ),
-
-      //     FutureBuilder(
-      //   future: _futureDataDash,
-      //   builder: (context, snapshot) {
-      //     if (snapshot.hasData) {
-      //       return ListView.builder(itemCount: snapshot.data.length,itemBuilder: (context, index) {
-      //         return Card(
-      //       child: Column(children: [
-      //         Text(snapshot.data[index].name),
-      //         // Text(widget.id!),
-
-      //         Text(snapshot.data[index].email),
-
-      //       ]),
-      //     );
-      //       },);
-      //     } else {
-      //       return Text("Error");
-      //     }
-      //     return Center(child: CircularProgressIndicator());
-      //   },
-      // ),
-
       drawer: Drawer(
         child: ListView(children: [
           ListTile(
@@ -185,17 +169,35 @@ class _MyMemberDashbordState extends State<MyMemberDashbord> {
             height: 40,
           ),
           ListTile(
-            title: Text("Event"),
-            leading: Icon(Icons.event),
-          ),
+              title: Text("Event"),
+              leading: Icon(Icons.event),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MyEventMember(),
+                    ));
+              }),
           ListTile(
-            title: Text("Compliant"),
-            leading: Icon(Icons.warning_rounded),
-          ),
+              title: Text("Compliant"),
+              leading: Icon(Icons.warning_rounded),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MyComplaintAdd(),
+                    ));
+              }),
           ListTile(
-            title: Text("Notice"),
-            leading: Icon(Icons.note_add),
-          ),
+              title: Text("Notice"),
+              leading: Icon(Icons.note_add),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MyNoticeMember(),
+                    ));
+              }),
           Divider(
             thickness: 4,
             height: 20,

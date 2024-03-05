@@ -64,31 +64,34 @@ class _MyNoticeDisplayExState extends State<MyNoticeDisplayEx> {
                     onTap: () {
                       Get.bottomSheet(Flexible(
                           
-                        child: Column(
-                          children: [
-                            Text("Title : ${myNotice[index].titleN}",
-                                style: GoogleFonts.sancreek(fontSize: 40)),
-                            Divider(
-                              height: 30,
-                              thickness: 2,
-                            ),
-                            Text(
-                              "Description : ${myNotice[index].descN}",
-                              style: GoogleFonts.saira(fontSize: 30),
-                            ),
-                            Divider(
-                              height: 15,
-                              thickness: 1,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Text("Date : ${myNotice[index].dateN}"),
-                              ],
-                            ),
-                          ],
-                        
-                      )),
+                        child: Padding(
+                          padding: const EdgeInsets.all(15.0),
+                          child: Column(
+                            children: [
+                              Text("Title : ${myNotice[index].titleN}",
+                                  style: GoogleFonts.sancreek(fontSize: 40)),
+                              Divider(
+                                height: 30,
+                                thickness: 2,
+                              ),
+                              Text(
+                                "Description : ${myNotice[index].descN}",
+                                style: GoogleFonts.saira(fontSize: 30),
+                              ),
+                              Divider(
+                                height: 15,
+                                thickness: 1,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Text("Date : ${myNotice[index].dateN}"),
+                                ],
+                              ),
+                            ],
+
+                                                ),
+                        )),
                       backgroundColor: Colors.white,
                       isDismissible: true,
                       enableDrag: true,
